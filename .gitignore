@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Training outputs / data (large)
+runs/
+datasets/
+*.pt
+*.cache
+
+# Exported models (attach to a GitHub Release instead, or use Git LFS)
+models/*.onnx
+
+# C++ build
+cpp/build/
+build/
+third_party/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
