@@ -59,8 +59,8 @@ results/  benchmark.csv, benchmark.md, latency.png, demo images
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 python python/train.py --data african-wildlife.yaml --epochs 50        # add --device 0 on GPU
-python python/export.py --weights runs/yolo11n_wildlife/weights/best.pt   # -> models/best.onnx
-python python/check_parity.py --pt runs/yolo11n_wildlife/weights/best.pt \
+python python/export.py --weights models/best.pt   # -> models/best.onnx
+python python/check_parity.py --pt models/best.pt \
        --onnx models/best.onnx --data african-wildlife.yaml
 ```
 No GPU? Use `notebooks/train_colab.ipynb` and download `best.pt`, `best.onnx`, `classes.txt`.
@@ -95,7 +95,7 @@ cmake --build cpp\build --config Release
     --names models/classes.txt --backend ort --out results/demo_ort.jpg
 ./cpp/build/yolo_infer --model models/best.onnx --image assets/test.jpg --backend ort \
     --threads 4 --bench 200 --warmup 20
-scripts/run_bench.sh runs/yolo11n_wildlife/weights/best.pt models/best.onnx assets/test.jpg
+scripts/run_bench.sh models/best.pt models/best.onnx assets/test.jpg
 ```
 
 ## Implementation notes

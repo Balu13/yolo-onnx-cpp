@@ -36,6 +36,16 @@ def main() -> None:
     metrics = model.val()  # validation on the best weights
     print(f"mAP50-95: {metrics.box.map:.4f}  mAP50: {metrics.box.map50:.4f}")
 
-
+    # Ultralytics may nest the run dir differently between versions -> copy to a fixed path
+    import shutil
+    from pathlib import Path
+    best = Path(model.trainer.best)
+    Path("models").mkdir(exist_ok=True)
+    Path("results").mkdir(exist_ok=True)
+    shutil.copy(best, "models/best.pt")
+    if (run_dir / "results.png").exists():
+        shutil.copy(run_dir / "results.png", "results/training_curves.png")
+    print(f"Run dir: {run_dir}\n  -> models/best.pt, results/training_curves.png")
+    
 if __name__ == "__main__":
     main()

@@ -28,7 +28,7 @@ def main() -> None:
     model = YOLO(args.weights)
     onnx_path = Path(
         model.export(format="onnx", imgsz=args.imgsz, opset=args.opset,
-                     simplify=True, dynamic=False, half=args.half)
+                     simplify=True, dynamic=False, **({"half": True} if args.half else {}))
     )
     dst = out_dir / onnx_path.name
     shutil.copy(onnx_path, dst)
