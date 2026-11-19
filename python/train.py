@@ -5,9 +5,9 @@ Examples:
     python python/train.py --data path/to/my_dataset/data.yaml --model yolo11s.pt --device 0
 """
 import argparse
-
+import shutil
+from pathlib import Path
 from ultralytics import YOLO
-
 
 def main() -> None:
     p = argparse.ArgumentParser()
@@ -37,9 +37,8 @@ def main() -> None:
     print(f"mAP50-95: {metrics.box.map:.4f}  mAP50: {metrics.box.map50:.4f}")
 
     # Ultralytics may nest the run dir differently between versions -> copy to a fixed path
-    import shutil
-    from pathlib import Path
-    best = Path(model.trainer.best)
+    best = Path(model.trainer.best)          # .../weights/best.pt
+    run_dir = best.parent.parent             # .../yolo11n_wildlife
     Path("models").mkdir(exist_ok=True)
     Path("results").mkdir(exist_ok=True)
     shutil.copy(best, "models/best.pt")
