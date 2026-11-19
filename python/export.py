@@ -31,8 +31,9 @@ def main() -> None:
                      simplify=True, dynamic=False, **({"half": True} if args.half else {}))
     )
     dst = out_dir / onnx_path.name
-    shutil.copy(onnx_path, dst)
-
+    if onnx_path.resolve() != dst.resolve():  # weights may already live in out_dir
+        shutil.copy(onnx_path, dst)
+        
     # Class names, one per line, in id order -> used by the C++ app.
     names = model.names
     (out_dir / "classes.txt").write_text("\n".join(names[i] for i in range(len(names))) + "\n")
