@@ -24,7 +24,7 @@ def stats(ms: list[float]) -> dict:
             "p90": np.percentile(a, 90), "p99": np.percentile(a, 99)}
 
 
-def bench_pytorch(pt: str, image: str, imgsz: int, warmup: int, iters: int) -> dict:
+def bench_ultralytics(pt: str, image: str, imgsz: int, warmup: int, iters: int) -> dict:
     model = YOLO(pt)
     for _ in range(warmup):
         model.predict(image, imgsz=imgsz, device="cpu", verbose=False)
@@ -67,8 +67,8 @@ def main() -> None:
     args = p.parse_args()
 
     rows = {
-        "py-pytorch": bench_pytorch(args.pt, args.image, args.imgsz, args.warmup, args.iters),
-        "py-onnxruntime": bench_ort(args.onnx, args.imgsz, args.warmup, args.iters, args.threads),
+        "py-pytorch": bench_ultralytics(args.pt, args.image, args.imgsz, args.warmup, args.iters),
+        "py-onnxruntime": bench_ultralytics(args.onnx, args.image, args.imgsz, args.warmup, args.iters),
     }
 
     Path(args.csv).parent.mkdir(parents=True, exist_ok=True)

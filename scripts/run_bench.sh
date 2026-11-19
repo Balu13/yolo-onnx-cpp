@@ -22,8 +22,8 @@ rm -f "$CSV"
     --bench "$ITERS" --warmup "$WARMUP" --csv "$CSV" --out results/demo_opencv.jpg
 
 if "$BIN" --model "$ONNX" --image "$IMG" --backend ort >/dev/null 2>&1; then
-    for T in 1 2 4 0; do   # 0 = ORT default (all physical cores)
-        "$BIN" --model "$ONNX" --image "$IMG" --names models/classes.txt --backend ort \
+    for T in 1 2 4 8 0; do   # 0 = ORT default; 8 = with Hyper-Threading
+		"$BIN" --model "$ONNX" --image "$IMG" --names models/classes.txt --backend ort \
             --threads "$T" --bench "$ITERS" --warmup "$WARMUP" --csv "$CSV" \
             --out results/demo_ort.jpg
     done

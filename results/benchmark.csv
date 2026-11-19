@@ -1,0 +1,9 @@
+runtime,model,imgsz,threads,pre_ms,infer_mean_ms,infer_p50_ms,infer_p90_ms,infer_p99_ms,post_ms,total_ms,fps
+py-pytorch,models/best.pt,640,0,2.539,50.901,50.840,53.149,61.496,1.241,54.681,18.29
+py-onnxruntime,models/best.onnx,640,0,3.598,57.494,57.406,61.120,64.650,1.054,62.145,16.09
+cpp-opencv-dnn,models/best.onnx,640,0,3.407,108.493,107.262,114.959,122.383,0.136,112.035,8.93
+cpp-onnxruntime,models/best.onnx,640,1,2.712,97.964,96.216,105.387,108.944,0.075,100.752,9.93
+cpp-onnxruntime,models/best.onnx,640,2,2.971,59.925,58.898,62.502,77.666,0.075,62.972,15.88
+cpp-onnxruntime,models/best.onnx,640,4,3.265,48.339,44.974,58.105,62.292,0.086,51.690,19.35
+cpp-onnxruntime,models/best.onnx,640,8,4.696,46.975,44.351,56.503,63.882,0.120,51.790,19.31
+cpp-onnxruntime,models/best.onnx,640,0,3.333,49.561,48.398,60.192,65.241,0.088,52.982,18.87
